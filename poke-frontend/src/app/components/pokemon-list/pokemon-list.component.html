@@ -1,0 +1,149 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Explorador de Pokémon</h1>
+
+    <!-- Filtros -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Buscar Pokémon</h5>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="nameFilter" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nameFilter" [(ngModel)]="nameInput"
+                        placeholder="Ej: pikachu" (keyup.enter)="applyFilters()" />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="limitFilter" class="form-label">Pokémon por página</label>
+                    <select class="form-select" id="limitFilter" [(ngModel)]="limit" (change)="changeLimit()">
+                        <option [value]="10">10</option>
+                        <option [value]="20">20</option>
+                        <option [value]="50">50</option>
+                        <option [value]="100">100</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary me-2" (click)="applyFilters()">
+                    Buscar
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="clearFilters()">
+                    Limpiar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtro por Tipo -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Filtrar por Tipo</h5>
+            <div class="d-flex flex-wrap gap-2">
+                @for (type of pokemonTypes; track type.name) {
+                <button type="button" class="btn btn-sm" [class.btn-primary]="typeFilter === type.name"
+                    [class.btn-outline-secondary]="typeFilter !== type.name"
+                    [style.background-color]="typeFilter === type.name ? type.color : 'transparent'"
+                    [style.border-color]="type.color" [style.color]="typeFilter === type.name ? '#fff' : type.color"
+                    (click)="filterByType(type.name)">
+                    {{ type.emoji }} {{ capitalize(type.name) }}
+                </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Estado de carga -->
+    @if (isLoading) {
+    <div class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2">Cargando Pokémon...</p>
+    </div>
+    }
+
+    <!-- Mensaje de error -->
+    @if (hasError) {
+    <div class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+    </div>
+    }
+
+    <!-- Información de paginación -->
+    @if (!isLoading && !hasError && pokemon.length > 0) {
+    <div class="mb-3">
+        <p class="text-muted">
+            Mostrando {{ offset + 1 }} - {{ Math.min(offset + limit, totalCount) }} de {{ totalCount }} Pokémon
+        </p>
+    </div>
+    }
+
+    <!-- Grid de Pokémon -->
+    @if (!isLoading && !hasError && pokemon.length > 0) {
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        @for (poke of pokemon; track poke.id) {
+        <div class="col">
+            <div class="card h-100 pokemon-card">
+                <img [src]="poke.spriteUrl" [alt]="poke.name" class="card-img-top pokemon-image" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ capitalize(poke.name) }}</h5>
+                    <p class="card-text">
+                        <small class="text-muted">#{{ poke.id }}</small>
+                    </p>
+
+                    <div class="mb-2">
+                        @for (type of poke.types; track type) {
+                        <span [className]="getTypeClass(type)" class="me-1">
+                            {{ capitalize(type) }}
+                        </span>
+                        }
+                    </div>
+
+                    <a [routerLink]="['/pokemon', poke.id]" class="btn btn-primary btn-sm w-100">
+                        Ver Detalle
+                    </a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Sin resultados -->
+    @if (!isLoading && !hasError && pokemon.length === 0) {
+    <div class="alert alert-info text-center" role="alert">
+        <h4>No se encontraron Pokémon</h4>
+        <p>Intenta con otro nombre o limpia los filtros.</p>
+    </div>
+    }
+
+    <!-- Paginación -->
+    @if (!isLoading && !hasError && pokemon.length > 0 && totalPages > 1) {
+    <nav aria-label="Navegación de páginas" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <!-- Botón Anterior -->
+            <li class="page-item" [class.disabled]="offset === 0">
+                <button class="page-link" (click)="previousPage()" [disabled]="offset === 0">
+                    Anterior
+                </button>
+            </li>
+
+            <!-- Números de página -->
+            @for (page of getPageNumbers(); track page) {
+            <li class="page-item" [class.active]="page === currentPage">
+                <button class="page-link" (click)="goToPage(page)">
+                    {{ page }}
+                </button>
+            </li>
+            }
+
+            <!-- Botón Siguiente -->
+            <li class="page-item" [class.disabled]="offset + limit >= totalCount">
+                <button class="page-link" (click)="nextPage()" [disabled]="offset + limit >= totalCount">
+                    Siguiente
+                </button>
+            </li>
+        </ul>
+    </nav>
+    }
+</div>

@@ -1,0 +1,131 @@
+<div class="container mt-4">
+  <!-- Botón volver -->
+  <button type="button" class="btn btn-secondary mb-4" (click)="goBack()">
+    ← Volver al Listado
+  </button>
+
+  <!-- Estado de carga -->
+  @if (isLoading) {
+    <div class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando información del Pokémon...</p>
+    </div>
+  }
+
+  <!-- Mensaje de error -->
+  @if (hasError) {
+    <div class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Detalle del Pokémon -->
+  @if (!isLoading && !hasError && pokemon) {
+    <div class="card">
+      <div class="row g-0">
+        <!-- Imagen -->
+        <div class="col-md-4">
+          <div class="pokemon-image-container">
+            <img 
+              [src]="pokemon.spriteUrl" 
+              [alt]="pokemon.name" 
+              class="img-fluid pokemon-image"
+            />
+          </div>
+          <div class="text-center p-3">
+            <h3 class="pokemon-id">#{{ pokemon.id }}</h3>
+          </div>
+        </div>
+
+        <!-- Información -->
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-title mb-3">{{ capitalize(pokemon.name) }}</h1>
+
+            <!-- Tipos -->
+            <div class="mb-4">
+              <h5>Tipo</h5>
+              @for (type of pokemon.types; track type) {
+                <span [className]="getTypeClass(type)" class="me-2">
+                  {{ capitalize(type) }}
+                </span>
+              }
+            </div>
+
+            <!-- Información básica -->
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <div class="info-box">
+                  <h6>Altura</h6>
+                  <p>{{ pokemon.height / 10 }} m</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <h6>Peso</h6>
+                  <p>{{ pokemon.weight / 10 }} kg</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <h6>Experiencia Base</h6>
+                  <p>{{ pokemon.baseExperience }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Habilidades -->
+            @if (pokemon.abilities.length > 0) {
+              <div class="mb-4">
+                <h5>Habilidades</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  @for (ability of pokemon.abilities; track ability.name) {
+                    <span class="badge bg-dark ability-badge">
+                      {{ capitalize(ability.name.replace('-', ' ')) }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Estadísticas -->
+            @if (pokemon.stats.length > 0) {
+              <div class="mt-4">
+                <h5>Estadísticas Base</h5>
+                <div class="stats-container">
+                  @for (stat of pokemon.stats; track stat.name) {
+                    <div class="stat-row mb-3">
+                      <div class="row align-items-center">
+                        <div class="col-4">
+                          <strong>{{ formatStatName(stat.name) }}</strong>
+                        </div>
+                        <div class="col-2 text-end">
+                          <span class="stat-value">{{ stat.baseStat }}</span>
+                        </div>
+                        <div class="col-6">
+                          <div class="progress">
+                            <div 
+                              class="progress-bar" 
+                              [ngClass]="getStatColor(stat.name)"
+                              [style.width.%]="getStatPercentage(stat.baseStat)"
+                              role="progressbar"
+                              [attr.aria-valuenow]="stat.baseStat"
+                              aria-valuemin="0"
+                              aria-valuemax="255">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

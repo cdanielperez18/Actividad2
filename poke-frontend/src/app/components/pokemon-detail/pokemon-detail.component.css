@@ -1,0 +1,117 @@
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-image-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.pokemon-image {
+  max-height: 250px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.pokemon-id {
+  color: #666;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+h1 {
+  color: #333;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+h5 {
+  color: #555;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+}
+
+.bg-purple {
+  background-color: #a040a0 !important;
+  color: white;
+}
+
+.bg-brown {
+  background-color: #e0c068 !important;
+  color: white;
+}
+
+.bg-pink {
+  background-color: #ee99ac !important;
+  color: white;
+}
+
+.info-box {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.info-box h6 {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  border: none;
+}
+
+.info-box p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.ability-badge {
+  font-size: 0.9rem;
+  padding: 0.5em 1em;
+  text-transform: capitalize;
+}
+
+.stats-container {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.stat-row strong {
+  color: #555;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.stat-value {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.progress {
+  height: 20px;
+  background-color: #e9ecef;
+}
+
+.progress-bar {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
