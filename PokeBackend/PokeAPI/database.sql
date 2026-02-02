@@ -1,0 +1,19 @@
+CREATE DATABASE PokeDB;
+USE PokeDB;
+
+CREATE TABLE Pokemon (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Height INT,
+    Weight INT,
+    BaseExperience INT,
+    SpriteUrl VARCHAR(500),
+    LastUpdated DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE PokemonTypes (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    PokemonId INT NOT NULL,
+    TypeName VARCHAR(50) NOT NULL,
+    FOREIGN KEY (PokemonId) REFERENCES Pokemon(Id) ON DELETE CASCADE
+);
