@@ -41,7 +41,7 @@ Este proyecto demuestra la implementación de una arquitectura completa que incl
 **Backend:**
 - ASP.NET Core 8.0
 - Entity Framework Core
-- SQL Server 2019
+- MySQl 8.0
 - Swagger/OpenAPI
 
 **Frontend:**

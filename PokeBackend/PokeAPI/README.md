@@ -6,7 +6,7 @@ API REST desarrollada en ASP.NET Core que actúa como capa intermedia entre el f
 
 - ASP.NET Core 8.0
 - Entity Framework Core
-- SQL Server
+- MySQL 8.0
 - Swagger/OpenAPI
 
 ## Arquitectura del Proyecto
