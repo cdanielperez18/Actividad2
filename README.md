@@ -1,6 +1,6 @@
 # Pokémon Explorer
 
-Aplicación Full Stack que implementa un explorador de Pokémon consumiendo PokeAPI mediante un backend intermedio desarrollado en ASP.NET Core con persistencia en SQL Server y un frontend en Angular.
+Aplicación Full Stack que implementa un explorador de Pokémon consumiendo PokeAPI mediante un backend intermedio desarrollado en ASP.NET Core con persistencia en MySQL y un frontend en Angular.
 
 ## Descripción
 
@@ -31,7 +31,7 @@ Este proyecto demuestra la implementación de una arquitectura completa que incl
          │ Entity Framework Core
          ↓
 ┌─────────────────┐
-│  SQL Server     │
+│      MySQL      │
 │   (Database)    │
 └─────────────────┘
 ```
@@ -118,7 +118,7 @@ Acceder a la aplicación en `http://localhost:4200`
 - Frontend consume exclusivamente el backend propio
 - Backend desarrollado en ASP.NET Core
 - Backend consume PokeAPI externa
-- Persistencia de datos en SQL Server
+- Persistencia de datos en MySQL
 - Uso de HttpClient y modelos tipados
 - Manejo centralizado de errores
 - Separación por capas en backend (Controller → Service → Repository)
