@@ -93,7 +93,7 @@ El backend implementa un patrón de cache lazy loading:
 ### Requisitos
 
 - .NET 8.0 SDK o superior
-- SQL Server 2019 o superior
+- MySQL Server 8.0 o superior
 
 ### Configuración
 
@@ -140,7 +140,7 @@ Lista paginada de Pokémon con filtros opcionales.
 
 **Ejemplo:**
 ```
-GET /api/pokemon?limit=20&offset=0&type=fire&name=char
+GET /api/pokemon?limit=20&offset=0&type=fire&name=charmander
 ```
 
 **Respuesta:**

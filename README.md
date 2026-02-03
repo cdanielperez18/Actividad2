@@ -75,7 +75,7 @@ pokemon-explorer/
 
 ### Paso 1: Configurar Base de Datos
 
-1. Abrir SQL Server Management Studio (SSMS)
+1. Abrir MySQL Workbench o cliente MySQL
 2. Ejecutar el script SQL proporcionado en el README del backend
 3. Verificar que la base de datos `PokemonDB` se haya creado correctamente
 
